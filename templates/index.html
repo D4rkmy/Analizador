@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador Léxico y Sintáctico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #444;
+        }
+        textarea {
+            width: 70%;
+            height: 120px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 1px solid #888;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        #borrar {
+            background-color: #e74c3c;
+        }
+        #borrar:hover {
+            background-color: #c0392b;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .analyzers {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .analyzers > div {
+            width: 40%;
+        }
+        td {
+            background-color: #fafafa;
+            color: #333;
+        }
+        td.correct {
+            background-color: #dff0d8;
+        }
+        td.incorrect {
+            background-color: #f2dede;
+        }
+    </style>
+</head>
+<body>
+    <h1>Analizador Léxico y Sintáctico</h1>
+    
+    <form method="POST">
+        <textarea name="codigo" placeholder="Ingrese el código..."></textarea>
+        <br>
+        <button type="submit" id="analizar">Analizar</button>
+        <button type="reset" id="borrar">Borrar</button>
+    </form>
+    
+    <div class="analyzers">
+
+        <div>
+            <h2>Analizador Léxico</h2>
+            <table>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Línea</th>
+                    <th>Columna</th>
+                </tr>
+                {% for token in tokens %}
+                <tr>
+                    <td>{{ token.tipo }}</td>
+                    <td>{{ token.valor }}</td>
+                    <td>{{ token.linea }}</td>
+                    <td>{{ token.columna }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    
+        <div>
+            <h2>Analizador Sintáctico</h2>
+            <table>
+                <tr>
+                    <th>Línea</th>
+                    <th>Tipo de Estructura</th>
+                    <th>Estructura Correcta</th>
+                    <th>Estructura Incorrecta</th>
+                </tr>
+                {% for estructura in estructuras %}
+                <tr>
+                    <td>{{ estructura.linea }}</td>
+                    <td>{{ estructura.tipo_estructura }}</td>
+                    <td class="correct">{{ estructura.estructura_correcta }}</td>
+                    <td class="incorrect">{{ estructura.estructura_incorrecta }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
